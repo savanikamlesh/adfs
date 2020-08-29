@@ -8,7 +8,7 @@
        win_shell: "(new-netipaddress -InterfaceAlias Ethernet -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
 
      - name: Set Password
-         win_user:
+       win_user:
          name: administrator
          password: "{{dc_password}}"
          state: present
