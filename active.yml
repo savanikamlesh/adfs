@@ -61,7 +61,7 @@
            include_sub_features=yes
            state=present
            register: result
-      delegate_to: '{{ dc_address }}'
+      
 
      - name: Create Domain
        win_domain: >
