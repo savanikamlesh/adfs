@@ -39,13 +39,11 @@
         state: started  
         delegate_to: '{{ dc_address }}' 
     
-     - name: Disable firewall for Domain, Public and Private profiles
+     - name: Disable Domain firewall
        win_firewall:
-        state: disabled
-        profiles:
-        - Domain
-        - Private
-        - Public
+         state: disabled
+         profiles:
+         - Domain
        tags: disable_firewall
        delegate_to: '{{ dc_address }}'
 
