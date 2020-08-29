@@ -14,3 +14,11 @@
          state: present
          delegate_to: '{{ dc_address }}'
          ignore_errors: True  
+
+      - name: Set upstream DNS server 
+        win_dns_client:
+           adapter_names: '*'
+           ipv4_addresses:
+           - '{{ upstream_dns_1 }}'
+           - '{{ upstream_dns_2 }}'
+           delegate_to: '{{ dc_address }}'
