@@ -38,4 +38,24 @@
         name: w32time
         state: started  
         delegate_to: '{{ dc_address }}' 
-       
+    
+     - name: Disable firewall for Domain, Public and Private profiles
+       win_firewall:
+        state: disabled
+        profiles:
+        - Domain
+        - Private
+        - Public
+        tags: disable_firewall
+        delegate_to: '{{ dc_address }}'
+  
+     - name: Change the hostname 
+       win_hostname:
+        name: '{{ dc_hostname }}'
+        register: res
+        delegate_to: '{{ dc_address }}'
+
+     - name: Reboot
+       win_reboot:
+        when: res.reboot_required   
+        delegate_to: '{{ dc_address }}'
