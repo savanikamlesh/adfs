@@ -13,4 +13,4 @@
          password: "{{dc_password}}"
          state: present
          delegate_to: '{{ dc_address }}'
-          ignore_errors: True  
+         ignore_errors: True  
