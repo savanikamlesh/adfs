@@ -60,7 +60,7 @@
            include_management_tools=yes
            include_sub_features=yes
            state=present
-           register: result
+       register: result
       
 
      - name: Create Domain
@@ -82,7 +82,7 @@
             adapter_names: '*'
             ipv4_addresses:
             - '127.0.0.1'
-      delegate_to: '{{ dc_address }}'
+
       
     - name: Create reverse DNS zone
       win_shell: "Add-DnsServerPrimaryZone -NetworkID {{reverse_dns_zone}} -ReplicationScope Forest"
@@ -103,4 +103,4 @@
        resource_name: xRemoteDesktopAdmin
        Ensure: present
        UserAuthentication: NonSecure
-     delegate_to: "{{ dc_address }}"
+    
