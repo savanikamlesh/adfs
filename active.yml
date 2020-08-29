@@ -40,6 +40,6 @@
         delegate_to: '{{ dc_address }}' 
     
      - name: Disable Domain firewall
-       win_shell: "(Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True)"
+       win_shell: "(Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled false)"
        delegate_to: '{{ dc_address }}'
 
