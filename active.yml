@@ -48,14 +48,4 @@
         - Public
         tags: disable_firewall
         delegate_to: '{{ dc_address }}'
-  
-     - name: Change the hostname 
-       win_hostname:
-        name: '{{ dc_hostname }}'
-        register: res
-        delegate_to: '{{ dc_address }}'
 
-     - name: Reboot
-       win_reboot:
-        when: res.reboot_required   
-        delegate_to: '{{ dc_address }}'
