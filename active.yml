@@ -1,6 +1,6 @@
  - name: Collect only facts returned by facter
-   hosts: all
-   gather_facts: true  
+   #hosts: all
+  # gather_facts: true  
   
    tasks:
      
