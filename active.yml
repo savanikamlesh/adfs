@@ -6,7 +6,7 @@
      
      - name: Set static IP address
        win_shell: "(new-netipaddress -InterfaceAlias Ethernet -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
-
+   
      - name: Set Password
        win_user:
          name: administrator
@@ -40,10 +40,6 @@
         delegate_to: '{{ dc_address }}' 
     
      - name: Disable Domain firewall
-       win_firewall:
-         state: disabled
-         profiles:
-         - Domain
-       tags: disable_firewall
+       win_shell: "(Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True)"
        delegate_to: '{{ dc_address }}'
 
