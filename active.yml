@@ -98,7 +98,7 @@
 
      - name: Enable Remote Desktop
        win_dsc:
-       resource_name: xRemoteDesktopAdmin
-       Ensure: present
-       UserAuthentication: NonSecure
+         resource_name: xRemoteDesktopAdmin
+         Ensure: present
+         UserAuthentication: NonSecure
     
