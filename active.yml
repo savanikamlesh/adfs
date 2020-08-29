@@ -46,6 +46,6 @@
         - Domain
         - Private
         - Public
-        tags: disable_firewall
-        delegate_to: '{{ dc_address }}'
+       tags: disable_firewall
+       delegate_to: '{{ dc_address }}'
 
