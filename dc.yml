@@ -2,13 +2,6 @@
   hosts: all
   gather_facts: false  
 
-  vars_prompt:
-    - name: dn_user
-      prompt: "Enter your Domain Admin username ?"
-      private: no
-    - name: dn_admin_pwd
-      prompt: "Enter your Domain Admin password ?"
-      
   tasks:
      
      - name: Set static IP address
