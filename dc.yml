@@ -1,6 +1,6 @@
 - name: Collect only facts returned by facter
-   hosts: all
-   gather_facts: false  
+  hosts: all
+  gather_facts: false  
 
 vars_prompt:
     - name: dn_user
