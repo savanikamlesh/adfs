@@ -1,7 +1,14 @@
 - name: Collect only facts returned by facter
    hosts: all
    gather_facts: false  
-  
+
+vars_prompt:
+    - name: dn_user
+      prompt: "Enter your {{ dn_user }} username ?"
+      private: no
+    - name: dn_admin_pwd
+      prompt: "Enter your {{ dn_admin_pwd }} password ?"
+      
    tasks:
      
      - name: Set static IP address
@@ -37,6 +44,60 @@
        win_reboot:
        when: res.reboot_required   
        delegate_to: '{{ dc_address }}'
+       
+     - name: Join to the domain
+       win_domain_membership:
+         dns_domain_name: '{{ dns_name }}'
+         domain_admin_user: "{{ domain_name }}\\{{ dn_user }}"
+         domain_admin_password: "{{ dn_admin_pwd }}"
+         state: domain
+     register: domain_state
+     
+     - name: Reboot after joining
+       win_reboot:
+         msg: "Joining Domain.Rebooting..."
+         pre_reboot_delay: 15
+       when: domain_state.reboot_required</pre> 
+
+# Install ADDS feature
+     - name: Install Active Directory domain services
+       win_feature:
+          name: AD-Domain-Services
+          include_management_tools: yes
+          include_sub_features: yes
+          state: present
+       register: domain_role
+     - debug:
+          msg: "{{ domain_role }}"
+     
+     - name: Pause for 10 seconds before promoting
+       pause:
+       seconds: 10
+    
+# Promote to DC and join specific site
+     - name: Promote Domain Controller to exisiting domain
+       win_domain_controller:
+       dns_domain_name: "{{ domain_name }}"
+       domain_admin_user: "{{ domain_name }}\\{{ dn_user }}"
+       domain_admin_password: "{{ dn_admin_pwd }}"
+       safe_mode_password: "{{ recovery_password }}"
+       state: domain_controller
+       site_name: '{{ dc_sitename }}'
+       register: add_existing_dc_result 
+       
+     - name: Set internal DNS server 
+       win_dns_client:
+          adapter_names: '*'
+          ipv4_addresses:
+          - '127.0.0.1'
+      
+     - name: ensure ADWS service is started
+       win_service:
+          name: ADWS
+          state: started
+          register: adws_service
+     - debug:
+          msg: "{{ adws_service }}"
 
      - name: Set internal DNS server 
        win_dns_client:
