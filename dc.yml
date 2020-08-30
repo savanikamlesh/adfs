@@ -1,1 +1,57 @@
+- name: Collect only facts returned by facter
+   hosts: all
+   gather_facts: false  
+  
+   tasks:
+     
+     - name: Set static IP address
+       win_shell: "(new-netipaddress -InterfaceAlias Ethernet -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
+   
+     - name: Set Password
+       win_user:
+         name: administrator
+         password: "{{dc_password}}"
+         state: present
+         delegate_to: '{{ dc_address }}'
+         ignore_errors: True  
 
+     - name: Set upstream DNS server 
+       win_dns_client:
+           adapter_names: '*'
+           ipv4_addresses:
+           - '{{ upstream_dns_1 }}'
+           - '{{ upstream_dns_2 }}'
+           delegate_to: '{{ dc_address }}'
+
+     - name: Disable Domain firewall
+       win_shell: "(Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled false)"
+       delegate_to: '{{ dc_address }}'
+
+     - name: Change the hostname 
+       win_hostname:
+         name: '{{ dc_hostname }}'
+       register: res
+       delegate_to: '{{ dc_address }}'
+
+     - name: Reboot
+       win_reboot:
+       when: res.reboot_required   
+       delegate_to: '{{ dc_address }}'
+
+     - name: Set internal DNS server 
+       win_dns_client:
+            adapter_names: '*'
+            ipv4_addresses:
+            - '127.0.0.1'
+
+     - name: Check for xRemoteDesktopAdmin Powershell module
+       win_psmodule:
+         name: xRemoteDesktopAdmin
+         state: present
+       delegate_to: "{{ dc_address }}"
+
+     - name: Enable Remote Desktop
+       win_dsc:
+         resource_name: xRemoteDesktopAdmin
+         Ensure: present
+         UserAuthentication: NonSecure
