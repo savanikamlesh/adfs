@@ -45,12 +45,6 @@
          domain_admin_password: "{{ dn_admin_pwd }}"
          state: domain
      
-     - name: Reboot after joining
-       win_reboot:
-         msg: "Joining Domain.Rebooting..."
-         pre_reboot_delay: 15
-       when: domain_state.reboot_required</pre> 
-
 # Install ADDS feature
      - name: Install Active Directory domain services
        win_feature:
