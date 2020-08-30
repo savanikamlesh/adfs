@@ -44,7 +44,6 @@
          domain_admin_user: "{{ domain_name }}\\{{ dn_user }}"
          domain_admin_password: "{{ dn_admin_pwd }}"
          state: domain
-       register: domain_state
      
      - name: Reboot after joining
        win_reboot:
