@@ -2,7 +2,7 @@
   hosts: all
   gather_facts: false  
 
-vars_prompt:
+  vars_prompt:
     - name: dn_user
       prompt: "Enter your {{ dn_user }} username ?"
       private: no
