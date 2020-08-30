@@ -70,13 +70,7 @@
         state: domain_controller
         site_name: '{{ dc_sitename }}'
        register: add_existing_dc_result 
-       
-     - name: Set internal DNS server 
-       win_dns_client:
-          adapter_names: '*'
-          ipv4_addresses:
-          - '127.0.0.1'
-      
+           
      - name: ensure ADWS service is started
        win_service:
           name: ADWS
