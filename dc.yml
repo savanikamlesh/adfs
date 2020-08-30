@@ -3,22 +3,6 @@
   gather_facts: false  
 
   tasks:
-     - name: Add an exact version of PowerShell module
-       win_psmodule:
-          name: PowerShellModule
-          required_version: "4.0.2"
-          state: present
-
-     - name: Install or update an existing PowerShell module to the newest version
-       win_psmodule:
-         name: PowerShellModule
-         state: latest
-
-     - name: Install newer version of built-in Windows module
-       win_psmodule:
-          name: Pester
-          skip_publisher_check: yes
-          state: present
           
      - name: Set static IP address
        win_shell: "(new-netipaddress -InterfaceAlias Ethernet -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
