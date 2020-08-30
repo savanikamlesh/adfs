@@ -82,8 +82,6 @@
           name: ADWS
           state: started
           register: adws_service
-     - debug:
-          msg: "{{ adws_service }}"
 
      - name: Set internal DNS server 
        win_dns_client:
