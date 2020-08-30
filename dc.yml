@@ -4,10 +4,10 @@
 
   vars_prompt:
     - name: dn_user
-      prompt: "Enter your {{ dn_user }} username ?"
+      prompt: "Enter your Domain Admin username ?"
       private: no
     - name: dn_admin_pwd
-      prompt: "Enter your {{ dn_admin_pwd }} password ?"
+      prompt: "Enter your Domain Admin password ?"
       
   tasks:
      
