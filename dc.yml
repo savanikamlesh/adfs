@@ -77,12 +77,12 @@
 # Promote to DC and join specific site
      - name: Promote Domain Controller to exisiting domain
        win_domain_controller:
-       dns_domain_name: "{{ domain_name }}"
-       domain_admin_user: "{{ domain_name }}\\{{ dn_user }}"
-       domain_admin_password: "{{ dn_admin_pwd }}"
-       safe_mode_password: "{{ recovery_password }}"
-       state: domain_controller
-       site_name: '{{ dc_sitename }}'
+        dns_domain_name: "{{ domain_name }}"
+        domain_admin_user: "{{ domain_name }}\\{{ dn_user }}"
+        domain_admin_password: "{{ dn_admin_pwd }}"
+        safe_mode_password: "{{ recovery_password }}"
+        state: domain_controller
+        site_name: '{{ dc_sitename }}'
        register: add_existing_dc_result 
        
      - name: Set internal DNS server 
