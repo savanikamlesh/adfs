@@ -9,7 +9,7 @@
    
      - name: Set Password
        win_user:
-         name: administrator
+         name: kam
          password: "{{dc_password}}"
          state: present
          delegate_to: '{{ dc_address }}'
