@@ -1,7 +1,6 @@
 - name: Collect only facts returned by facter
   hosts: all
   gather_facts: true  
-  cacheable: true
 
   tasks:
           
