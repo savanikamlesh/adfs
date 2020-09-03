@@ -86,5 +86,5 @@
             - '{{ upstream_dns_2 }}'
 
      - name: Run an executable and send data to the stdin for the executable
-       win_command: slmgr.vbs -skms kmseua.bvcorp.corp
-       win_command: slmgr.vbs -ato 
+       win_shell: cscript slmgr.vbs -skms kmseua.bvcorp.corp
+       win_shell: "slmgr.vbs -ato"
