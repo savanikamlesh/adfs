@@ -1,9 +1,15 @@
 - name: Collect only facts returned by facter
   hosts: all
   gather_facts: true  
-
+  become_method: runas
+  
+  vars:
+  ansible_become_password: "{{dc_password}}"
+  
   tasks:
      - name: Run an executable and send data to the stdin for the executable
-       win_shell: slmgr.vbs /skms (kmseua.bvcorp.corp)
+       become: yes
+       become_user: Administrator
+       win_shell: slmgr.vbs /skms kmseua.bvcorp.corp
        win_shell: slmgr.vbs /ato
  
