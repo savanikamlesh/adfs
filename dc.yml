@@ -2,7 +2,6 @@
   hosts: all
   gather_facts: true  
   become: yes
-  become_method: runas
   
   tasks:
      - name: Run an executable and send data to the stdin for the executable
