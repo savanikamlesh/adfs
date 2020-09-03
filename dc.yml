@@ -7,5 +7,5 @@
   tasks:
      - name: Run an executable and send data to the stdin for the executable
        win_command: cmd.exe /c slmgr.vbs -skms kmseua.bvcorp.corp
-       win_shell: cscript  C:\windows\system32\slmgr.vbs -ato
+       #win_shell: cscript  C:\windows\system32\slmgr.vbs -ato
  
