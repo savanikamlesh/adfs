@@ -5,5 +5,5 @@
   tasks:
      - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
        args:
-       executable: cmd
+        executable: cmd
  
