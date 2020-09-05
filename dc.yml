@@ -9,7 +9,3 @@
     # - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
      #  args:
       #  executable: cmd
- 
-     - win_shell: slmgr.vbs -skms fku-kms-01.fsu
-       args:
-        executable: cmd
