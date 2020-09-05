@@ -4,10 +4,8 @@
   
   tasks:
   
-     - win_command: cmd.exe /c slmgr.vbs -skms fku-kms-01.fsu
-       args:
-        sync: 10
-        poll: 0
+     - win_command: cmd.exe /c "(slmgr.vbs -skms fku-kms-01.fsu)"
+
     # - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
      #  args:
       #  executable: cmd
