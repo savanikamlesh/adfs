@@ -35,4 +35,12 @@
         name: DoNotPopWACConsoleAtSMLaunch
         data: 0x1
         type: dword
-        
+
+# Disable Wallpaper
+    - name: Disabling Wallpaper
+      win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+        name: DisableLogonBackgroundImage
+        data: 0x1
+        type: dword
+
