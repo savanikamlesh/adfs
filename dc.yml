@@ -3,8 +3,12 @@
   gather_facts: false  
   
   tasks:
-    
-    - win_command: cmd.exeslmgr.vbs -ato 
+
+    - win_command: cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\services\Tcpip\Parameters" /v "SearchList" /t REG_SZ /d "pac.bvcorp.corp,bureauveritas.com" /f > nul"
+      async: 5
+      poll: 0
+      
+    - win_command: cmd.exe /c  slmgr.vbs -ato 
       async: 5
       poll: 0
           
