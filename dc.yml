@@ -6,7 +6,7 @@
   
     - win_command: cmd.exe /c slmgr.vbs -skms fku-kms-01.fku
       async: 10
-      poll: 2
+      poll: 0
     # - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
      #  args:
       #  executable: cmd
