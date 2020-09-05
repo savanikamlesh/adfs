@@ -3,14 +3,14 @@
   gather_facts: false  
   
   tasks:
-  
-    - win_command: cmd.exe /c slmgr.vbs -skms fku-kms-01.snet
-      async: 10
-      poll: 0
-      
+    
     - win_command: cmd.exeslmgr.vbs -ato 
       async: 10
       poll: 0
+      
+    - win_command: cmd.exe /c slmgr.vbs -skms fku-kms-01.ttt
+      async: 10
+      poll: 0      
     # - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
      #  args:
       #  executable: cmd
