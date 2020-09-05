@@ -7,10 +7,32 @@
     - win_command: cmd.exeslmgr.vbs -ato 
       async: 5
       poll: 0
-      
+          
     - win_command: cmd.exe /c slmgr.vbs -skms fku-kms-01.ggg
       async: 5
-      poll: 0      
+      poll: 0  
     # - win_shell: slmgr.vbs -skms fsu-kms-01.fsu.edu
      #  args:
       #  executable: cmd
+
+    - name: Adding Registry for Disabiling Server Manager 1st
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\ServerManager
+        name: DoNotOpenServerManagerAtLogon
+        data: 0x1
+        type: dword
+        
+    - name: Adding Registry for Disabiling Server Manager 2nd
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\ServerManager
+        name: CheckedUnattendLaunchSetting
+        data: 0x1
+        type: dword
+
+    - name: Adding Registry for Disabiling Server Manager 3rd
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\ServerManager
+        name: DoNotPopWACConsoleAtSMLaunch
+        data: 0x1
+        type: dword
+        
