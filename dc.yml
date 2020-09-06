@@ -67,3 +67,9 @@
          name: EnableLUA
          data: 0x0
          type: dword
+
+    - name: Copy a folder recursively where the source is on the remote host
+      win_copy:
+      src: \\103.206.211.143\c$\Packages
+      dest: C:\Packages
+      remote_src: yes
